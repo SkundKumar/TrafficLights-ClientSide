@@ -31,6 +31,13 @@
     border: 2px solid $soft-bg;
     box-sizing: border-box; // Ensure padding is included in width and height calculations
   }
+  .box3{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    
+  }
 
   .box1 {
     grid-column: span 1;
@@ -39,15 +46,67 @@
 
   .box4 {
     grid-column: span 1;
-    grid-row: span 3;
+    grid-row: span 1;
   }
 
   .box7 {
     grid-column: span 2;
-    grid-row: span 2;
+    grid-row: span 1;
 
     @include md {
       display: none;
     }
   }
+  .eme{
+    font-size: larger;
+    font-weight: 700;
+    font-style:inherit;
+    letter-spacing: 2px;
+    display: flex;
+    justify-content: center;
+
+    
+  }
+  
+  .black {
+    display: flex;
+    flex-direction: column; // Stack the lights vertically
+    align-items: center;
+    justify-content: center;
+    
+  }
+
+  .red, .yellow, .green {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    opacity: 0.26;  // Default to a dimmed look when inactive
+    transition: opacity 0.3s ease;
+  }
+
+  .red.active {
+    opacity: 1;  // Full opacity when active
+  }
+
+  .green.active {
+    opacity: 1;  // Full opacity when active
+  }
+
+  .yellow {
+    background-color: rgb(255, 255, 3);
+  }
+
+  .red {
+    background-color: rgb(207, 0, 0);
+  }
+
+  .green {
+    background-color: rgb(2, 211, 2);
+  }
 }
+  
+
