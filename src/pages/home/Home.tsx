@@ -5,35 +5,44 @@ import ChartBox from "../../components/chartBox/ChartBox";
 import PieChartBox from "../../components/pieCartBox/PieChartBox";
 import TopBox from "../../components/topBox/TopBox";
 import {
-  barChartBoxRevenue,
-  barChartBoxVisit,
+  
   chartBoxConversion,
   chartBoxProduct,
   chartBoxRevenue,
-  chartBoxUser,
+  
 } from "../../data";
 import "./home.scss";
 
 const Home = () => {
   // State to keep track of the active light
-  const [activeLight, setActiveLight] = useState("red");
+  const [activeLight, setActiveLight] = useState("yellow");
+
+  // State to track whether the override is activated
+  const [override, setOverride] = useState(false);
 
   // Example data to trigger the light toggle
-  const trafficData = "green"; // Replace this with your dynamic data
+  const trafficData = "yellow"; // Replace this with your dynamic data
 
   useEffect(() => {
     // Toggling light based on trafficData value
-    if (trafficData === "green") {
-      setActiveLight("green");
-    } else if (trafficData === "yellow") {
-      setActiveLight("yellow");
-    } else {
-      setActiveLight("red");
+    if (!override) { // Only change the light if override is not active
+      if (trafficData === "green") {
+        setActiveLight("green");
+      } else if (trafficData === "yellow") {
+        setActiveLight("yellow");
+      } else {
+        setActiveLight("red");
+      }
     }
-  }, [trafficData]); // Re-run the effect when trafficData changes
+  }, [trafficData, override]); // Re-run the effect when trafficData or override changes
+
+  const handleOverrideClick = () => {
+    setOverride(!override); // Toggle the override state
+    setActiveLight("red"); // Set the light to red
+  };
 
   return (
-    <div className="home">
+    <div className={`home ${override ? "override-active" : ""}`}>
       <div className="box box3">
         <ChartBox {...chartBoxProduct} />
       </div>
@@ -61,6 +70,9 @@ const Home = () => {
       <div className="box box3">
         <div className="eme">Emergency</div>
       </div>
+      <div className="box box98">
+        <button onClick={handleOverrideClick}>OVER RIDE</button>        
+     </div>
     </div>
   );
 };
